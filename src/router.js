@@ -1,9 +1,17 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import VueResource from 'vue-resource'
 import Home from './views/Home.vue'
-
+import Create from './views/Create.vue'
+import Import from './views/Import.vue'
+import Wallet from './views/Wallet.vue'
+import Payment from './views/Payment.vue'
+import BootstrapVue from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+Vue.use(BootstrapVue);
 Vue.use(Router)
-
+Vue.use(VueResource)
 export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
@@ -12,6 +20,26 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/create',
+      name: 'create',
+      component: Create
+    },
+    {
+      path: '/import',
+      name: 'import',
+      component: Import
+    },
+    {
+      path: '/wallet',
+      name: 'wallet',
+      component: Wallet
+    },
+    {
+      path: '/payment',
+      name: 'payment',
+      component: Payment
     },
     {
       path: '/about',
