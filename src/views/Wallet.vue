@@ -3,16 +3,17 @@
 
     <p class="center"><span class="balance">{{balance}}</span> TTT</p>
     <p class="address">{{address}}</p>
-    <b-button @click="PaymentClicked">转账</b-button>
+    <mt-button type="primary" @click="PaymentClicked">转账</mt-button>
   </div>
 </template>
 
 <script>
   const Client = require('wallet-base')
+  
   export default {
     data () {
       return {
-        balance:"0.0",
+        balance:"",
         private_key:"",
         public_key:"",
         wallet_public_key:"",
@@ -35,6 +36,7 @@
       }
     },
     mounted:function(){
+        var self = this;
         var storage=window.localStorage;
         //storage.removeItem("is_registered");
         this.private_key = storage.getItem("private_key");
@@ -58,16 +60,23 @@
             storage.setItem("is_registered",true);
         }
         //get balance
-        var url = "http://150.109.57.242:6001/api/v1/asset/balance/"+this.address+"/TTT";
-        this.$http.get(url).then(response => {
-            // get body data
-            var json = response.body;
-            console.log("data:",json.data.stable);
-            //json = JSON.parse(data);
-            this.balance = (json.data.stable+json.data.pending)/1000000
-        }, response => {
-            // error callback
-        });
+        setInterval(function(){
+            getbalance();
+        },30000);
+
+        function getbalance(){
+            var url = "http://150.109.57.242:6001/api/v1/asset/balance/"+self.address+"/TTT";
+            self.$http.get(url).then(response => {
+                // get body data
+                var json = response.body;
+                console.log("data:",json.data.stable);
+                //json = JSON.parse(data);
+                self.balance = (json.data.stable+json.data.pending)/1000000
+            }, response => {
+                // error callback
+            });
+        }
+        getbalance();
     }
   }
 </script>
@@ -75,9 +84,6 @@
 <style scoped>
   .center{
     text-align: center;
-  }
-  .wxc-btn{
-    margin:10px auto;
   }
   .balance{
       font-size: 20px;

@@ -2,7 +2,7 @@
   <div>
     <h1>请把助记词抄在纸上</h1>
     <p>{{word}}</p>
-    <b-button @click="ImportClicked">我已备份</b-button>
+    <mt-button type="primary" @click="ImportClicked">我已备份</mt-button>
   </div>
 </template>
 

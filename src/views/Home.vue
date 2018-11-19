@@ -2,9 +2,9 @@
   <div>
     <img alt="logo" width="100" src="../assets/logo.png">
     <h1>trustnote开源钱包</h1>
-    <b-button @click="MakeClicked">创建钱包</b-button>
+    <mt-button type="primary" @click="MakeClicked">创建钱包</mt-button>
     <p></p>
-    <b-button @click="ImportClicked">导入钱包</b-button>
+    <mt-button type="primary" @click="ImportClicked">导入钱包</mt-button>
   </div>
 </template>
 <script>

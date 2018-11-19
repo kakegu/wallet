@@ -7,8 +7,11 @@ import Import from './views/Import.vue'
 import Wallet from './views/Wallet.vue'
 import Payment from './views/Payment.vue'
 import BootstrapVue from 'bootstrap-vue'
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+// import 'bootstrap/dist/css/bootstrap.css'
+// import 'bootstrap-vue/dist/bootstrap-vue.css'
+import Mint from 'mint-ui';
+import 'mint-ui/lib/style.css';
+Vue.use(Mint); 
 Vue.use(BootstrapVue);
 Vue.use(Router)
 Vue.use(VueResource)

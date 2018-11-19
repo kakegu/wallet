@@ -1,24 +1,40 @@
 <template>
   <div>
-    <h2 class="center">转账</h2>
-
-    <b-form-input type="text" v-model="to_address" required placeholder="输入转账地址"></b-form-input>
-    <b-form-input type="text" v-model="amount" required placeholder="输入转账金额"></b-form-input>
-    <b-form-input type="text" v-model="message" required placeholder="输入转账信息"></b-form-input>
-
+    <mt-header title="转账">
+        <router-link to="/wallet" slot="left">
+            <mt-button icon="back">返回</mt-button>
+        </router-link>
+    </mt-header>
+    <mt-field label="地址" v-bind:state="state.to_address" placeholder="输入转账地址" v-model="to_address"></mt-field>
+    <mt-field label="金额" type="number" v-bind:state="state.amount" placeholder="输入转账金额" v-model="amount"></mt-field>
+    <mt-field label="信息" type="textarea" placeholder="输入转账信息" v-model="message"></mt-field>
     <p class="text">{{text}}</p>
-    <b-button @click="PaymentClicked">支付</b-button>
-    <b-modal ref="alert" id="modal1" title="">
-        <p class="my-4">{{alertMSG}}</p>
-    </b-modal>
+    <mt-button type="primary" @click="PaymentClicked">支付</mt-button>
+    <div class="full mask" v-show="display"></div>
+    <div class="full" v-show="display">
+        <div style="position: absolute; left: 50%;top:45%;">
+            <div style="position: relative; left: -50%; color:#fff;">
+                <p>正在支付</p>
+            </div>
+        </div>
+        <div style="position: absolute; left: 50%;top:55%;">
+            <div style="position: relative; left: -50%; color:#fff;">
+                <p>
+                    <mt-spinner style="margin:20px auto;" type="fading-circle"></mt-spinner>
+                </p>
+            </div>
+        </div>
+    </div>
   </div>
 </template>
 
 <script>
   const Client = require('wallet-base')
+  import { MessageBox } from 'mint-ui';
   export default {
     data () {
       return {
+        display:false,
         alertMSG:"",
         to_address:"",
         private_key:"",
@@ -27,12 +43,33 @@
         address:"",
         amount:"",
         message:"",
-        text:""
+        text:"",
+        state:{
+            to_address:"",
+            amount:""
+        }
       }
+    },
+    watch: {
+        to_address: function (val, oldVal) {
+            if(val.length!=32){
+                this.state.to_address = "error";
+            }else{
+                this.state.to_address = "success";
+            }
+        },
+        amount: function (val, oldVal) {
+            if(val>0){
+                this.state.amount = "success";
+            }else{
+                this.state.amount = "error";
+            }
+        }
     },
     methods: {
       PaymentClicked (e) {
-        var self = this
+        var self = this;
+        this.display = true;
         console.log(e)
         var url = "http://150.109.57.242:6001/api/v1/asset/transfer";
         this.$http.post(url,{
@@ -42,7 +79,7 @@
             outputs:[
                 {
                     address: this.to_address,
-                    amount: parseInt(this.amount)
+                    amount: parseFloat(this.amount)*1000000
                 }
             ]
         },
@@ -51,8 +88,10 @@
         ).then((res) => {    //成功胡回调
             console.log("payment:",res.body);
             if (res.body.errMsg.indexOf("not enough asset")==0){
-                this.alertMSG = "你的余额不足！"
-                this.$refs.alert.show();
+                MessageBox.alert('余额不足！').then(action => {
+                    this.display = false;
+                });
+                
             }
             if (res.body.errMsg == "success"){
                 console.log("sign!!!")
@@ -77,8 +116,11 @@
                     console.log("return:",res.body);
                     if (res.body.errMsg == "success"){
                         console.log("unit:",res.body.data.unit);
-                        window.location.href = '/'
-                        this.$router.push('/'); //不知道为什么这个不起作用。。。
+                        MessageBox.alert('支付成功！').then(action => {
+                            window.location.href = '/'
+                            this.$router.push('/'); //不知道为什么这个不起作用。。。
+                        });
+                        
                     }
                     
                 
@@ -102,6 +144,19 @@
 </script>
 
 <style scoped>
+.mask{
+    background: #000;
+    opacity: 0.8;
+}
+.full{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
   input{
       width: 90%;
       margin: 10px auto;
@@ -120,12 +175,6 @@
   h1{
     text-align: center;
     font-size: 30px;
-  }
-  p{
-    width: 90%;
-    margin: 10px auto;
-    font-size: 22px;
-    font-weight: lighter;
   }
   .address{
       font-size:14px;
