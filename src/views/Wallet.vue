@@ -4,6 +4,8 @@
     <p class="center"><span class="balance">{{balance}}</span> TTT</p>
     <p class="address">{{address}}</p>
     <mt-button type="primary" @click="PaymentClicked">转账</mt-button>
+    <p></p>
+    <mt-button type="primary" @click="HistoryClicked">记录</mt-button>
   </div>
 </template>
 
@@ -24,6 +26,9 @@
       PaymentClicked (e) {
         console.log(e)
         this.$router.push('/payment');
+      },
+      HistoryClicked (e) {
+        this.$router.push('/history');
       }
     },
     created:function(){
@@ -60,23 +65,16 @@
             storage.setItem("is_registered",true);
         }
         //get balance
-        setInterval(function(){
-            getbalance();
-        },30000);
-
-        function getbalance(){
-            var url = "http://150.109.57.242:6001/api/v1/asset/balance/"+self.address+"/TTT";
-            self.$http.get(url).then(response => {
-                // get body data
-                var json = response.body;
-                console.log("data:",json.data.stable);
-                //json = JSON.parse(data);
-                self.balance = (json.data.stable+json.data.pending)/1000000
-            }, response => {
-                // error callback
-            });
-        }
-        getbalance();
+        var url = "http://150.109.57.242:6001/api/v1/asset/balance/"+this.address+"/TTT";
+        this.$http.get(url).then(response => {
+            // get body data
+            var json = response.body;
+            console.log("data:",json.data.stable);
+            //json = JSON.parse(data);
+            this.balance = (json.data.stable+json.data.pending)/1000000
+        }, response => {
+            // error callback
+        });
     }
   }
 </script>

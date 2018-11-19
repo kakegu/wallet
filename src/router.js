@@ -6,6 +6,7 @@ import Create from './views/Create.vue'
 import Import from './views/Import.vue'
 import Wallet from './views/Wallet.vue'
 import Payment from './views/Payment.vue'
+import History from './views/History.vue'
 import BootstrapVue from 'bootstrap-vue'
 // import 'bootstrap/dist/css/bootstrap.css'
 // import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -43,6 +44,11 @@ export default new Router({
       path: '/payment',
       name: 'payment',
       component: Payment
+    },
+    {
+      path: '/history',
+      name: 'history',
+      component: History
     },
     {
       path: '/about',
