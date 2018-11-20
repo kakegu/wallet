@@ -24,7 +24,7 @@
       var private_key = storage.getItem("private_key");
       if (private_key != null){
         console.log("privatekey!",private_key)
-        window.location.href = '/wallet'
+        //window.location.href = '/wallet'
         this.$router.push('/wallet'); //不知道为什么这个不起作用。。。
       }
     }
@@ -32,8 +32,8 @@
 </script>
 
 <style scoped>
-  .btn{
-    margin:10px auto;
+  p{
+    margin:20px auto;
   }
   h1{
     text-align: center;

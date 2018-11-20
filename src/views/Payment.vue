@@ -117,8 +117,8 @@
                     if (res.body.errMsg == "success"){
                         console.log("unit:",res.body.data.unit);
                         MessageBox.alert('支付成功！').then(action => {
-                            window.location.href = '/'
-                            this.$router.push('/'); //不知道为什么这个不起作用。。。
+                            //window.location.href = '/'
+                            self.$router.push('/'); //不知道为什么这个不起作用。。。
                         });
                         
                     }

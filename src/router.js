@@ -17,7 +17,7 @@ Vue.use(BootstrapVue);
 Vue.use(Router)
 Vue.use(VueResource)
 export default new Router({
-  mode: 'history',
+  //mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {

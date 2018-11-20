@@ -36,7 +36,7 @@
       var private_key = storage.getItem("private_key");
       if (private_key == null){
         console.log("privatekey!",private_key)
-        window.location.href = '/'
+        //window.location.href = '/'
         this.$router.push('/'); //不知道为什么这个不起作用。。。
       }
     },
