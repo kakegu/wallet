@@ -53,17 +53,27 @@
                 this.wallet_public_key = Client.walletPubKey(this.private_key, 0)
                 // 地址
                 this.address = Client.walletAddress(this.wallet_public_key, 0, 0)
-                //存储
+
+                var url = "http://150.109.57.242:6001/api/v1/account/register"
+                this.$http.post(url,{
+                    pubkey:this.wallet_public_key
+                },
+                {
+                    emulateJSON: false}
+                ).then((res) => {    //成功胡回调
+                    // resolve(res.body);
+                }).catch((res) => {   //失败的回掉
+                    // reject(res.body);
+                });
+                
+                //存储（不保存助记词）
                 var storage=window.localStorage;
                 storage.setItem("private_key",this.private_key);
                 storage.setItem("public_key",this.public_key);
                 storage.setItem("wallet_public_key",this.wallet_public_key);
                 storage.setItem("address",this.address);
-                //不保存助记词
-                this.$router.push({
-                    path: '/wallet', 
-                    name: 'wallet',
-                })
+                //跳转到 wallet
+                this.$router.push('/wallet');
             }, 2000);
             
         }

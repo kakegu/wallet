@@ -48,22 +48,6 @@
         this.public_key = storage.getItem("public_key");
         this.wallet_public_key = storage.getItem("wallet_public_key");
         this.address = storage.getItem("address");
-        var is_registered = storage.getItem("is_registered");
-        if (is_registered == null){
-            //注册
-            var url = "http://150.109.57.242:6001/api/v1/account/register"
-            this.$http.post(url,{
-                pubkey:this.wallet_public_key
-            },
-            {
-                emulateJSON: false}
-            ).then((res) => {    //成功胡回调
-                // resolve(res.body);
-            }).catch((res) => {   //失败的回掉
-                // reject(res.body);
-            });
-            storage.setItem("is_registered",true);
-        }
         //get balance
         var url = "http://150.109.57.242:6001/api/v1/asset/balance/"+this.address+"/TTT";
         this.$http.get(url).then(response => {
