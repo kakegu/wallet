@@ -1,10 +1,10 @@
 <template>
   <div>
     <img alt="logo" width="100" src="../assets/logo.png">
-    <h1>trustnote开源钱包</h1>
-    <mt-button type="primary" @click="MakeClicked">创建钱包</mt-button>
+    <h1>TrustNote Fusion Wallet</h1>
+    <mt-button type="primary" @click="MakeClicked">Create New Wallet</mt-button>
     <p></p>
-    <mt-button type="primary" @click="ImportClicked">导入钱包</mt-button>
+    <mt-button type="primary" @click="ImportClicked">Import Existing Wallet</mt-button>
   </div>
 </template>
 <script>

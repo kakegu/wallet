@@ -1,14 +1,13 @@
 <template>
   <div>
-    <h1>输入助记词</h1>
-    <p>单词之间需要有空格</p>
+    <h1>Please enter the mnemonic</h1>
     <textarea v-model="word"></textarea>
-    <mt-button type="primary" @click="ImportClicked">立刻导入</mt-button>
+    <mt-button type="primary" @click="ImportClicked">Enter</mt-button>
     <div class="full mask" v-show="display"></div>
     <div class="full" v-show="display">
         <div style="position: absolute; left: 50%;top:45%;">
             <div style="position: relative; left: -50%; color:#fff;">
-                <p>正在导入</p>
+                <p>Importing</p>
             </div>
         </div>
         <div style="position: absolute; left: 50%;top:55%;">

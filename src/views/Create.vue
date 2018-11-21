@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h1>请把助记词抄在纸上</h1>
+    <h1>Please write down your mnemonic on a piece of paper</h1>
     <p>{{word}}</p>
-    <mt-button type="primary" @click="ImportClicked">我已备份</mt-button>
+    <mt-button type="primary" @click="ImportClicked">Next</mt-button>
   </div>
 </template>
 

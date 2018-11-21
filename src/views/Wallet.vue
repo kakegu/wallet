@@ -3,9 +3,9 @@
 
     <p class="center"><span class="balance">{{balance}}</span> TTT</p>
     <p class="address">{{address}}</p>
-    <mt-button type="primary" @click="PaymentClicked">转账</mt-button>
+    <mt-button type="primary" @click="PaymentClicked">Transfer</mt-button>
     <p></p>
-    <mt-button type="primary" @click="HistoryClicked">记录</mt-button>
+    <mt-button type="primary" @click="HistoryClicked">History</mt-button>
   </div>
 </template>
 

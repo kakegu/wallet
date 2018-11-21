@@ -1,20 +1,20 @@
 <template>
   <div>
-    <mt-header title="转账">
+    <mt-header title="Transfer">
         <router-link to="/wallet" slot="left">
-            <mt-button icon="back">返回</mt-button>
+            <mt-button icon="back">Back</mt-button>
         </router-link>
     </mt-header>
-    <mt-field label="地址" v-bind:state="state.to_address" placeholder="输入转账地址" v-model="to_address"></mt-field>
-    <mt-field label="金额" type="number" v-bind:state="state.amount" placeholder="输入转账金额" v-model="amount"></mt-field>
-    <mt-field label="信息" type="textarea" placeholder="输入转账信息" v-model="message"></mt-field>
+    <mt-field label="Address" v-bind:state="state.to_address" placeholder="Please enter the address of the recipient" v-model="to_address"></mt-field>
+    <mt-field label="Amount" type="number" v-bind:state="state.amount" placeholder="Please enter the amount of the transfer" v-model="amount"></mt-field>
+    <mt-field label="Description" type="textarea" placeholder="Please enter the description of the transfer" v-model="message"></mt-field>
     <p class="text">{{text}}</p>
-    <mt-button type="primary" @click="PaymentClicked">支付</mt-button>
+    <mt-button type="primary" @click="PaymentClicked">Transfer</mt-button>
     <div class="full mask" v-show="display"></div>
     <div class="full" v-show="display">
         <div style="position: absolute; left: 50%;top:45%;">
             <div style="position: relative; left: -50%; color:#fff;">
-                <p>正在支付</p>
+                <p>Making payment</p>
             </div>
         </div>
         <div style="position: absolute; left: 50%;top:55%;">
@@ -88,7 +88,7 @@
         ).then((res) => {    //成功胡回调
             console.log("payment:",res.body);
             if (res.body.errMsg.indexOf("not enough asset")==0){
-                MessageBox.alert('余额不足！').then(action => {
+                MessageBox.alert('Insufficient balance!').then(action => {
                     this.display = false;
                 });
                 
@@ -116,7 +116,7 @@
                     console.log("return:",res.body);
                     if (res.body.errMsg == "success"){
                         console.log("unit:",res.body.data.unit);
-                        MessageBox.alert('支付成功！').then(action => {
+                        MessageBox.alert('payment successful!').then(action => {
                             //window.location.href = '/'
                             self.$router.push('/'); //不知道为什么这个不起作用。。。
                         });

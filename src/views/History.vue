@@ -1,8 +1,8 @@
 <template>
   <div>
-    <mt-header title="交易记录">
+    <mt-header title="Transaction History">
         <router-link to="/wallet" slot="left">
-            <mt-button icon="back">返回</mt-button>
+            <mt-button icon="back">Back</mt-button>
         </router-link>
     </mt-header>
     <div v-bind:key="item.index" v-for = "item in list" style="text-align:left;">
