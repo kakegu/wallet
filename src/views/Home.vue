@@ -64,16 +64,18 @@ body {
   top: 0;
   left: 0;
   right: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 .center {
   display: table-cell;
   vertical-align: middle;
 }
-.pan{
-      padding: 40px;
-    background: #fff;
-    width: 320px;
-    margin: 0 auto;
-    border-radius: 10px;
+.pan {
+  padding: 40px;
+  background: #fff;
+  width: 400px;
+  margin: 0 auto;
+  border-radius: 10px;
 }
 </style>
