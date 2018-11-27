@@ -6,11 +6,11 @@
         </router-link>
     </mt-header>
     <p></p>
-    <mt-button type="default" disabled @click="MainNetClicked">MainNet (open soon)</mt-button>
+    <mt-button type="primary" @click="MainNetClicked">MainNet (open soon)</mt-button>
     <p></p>
     <mt-button type="primary" @click="TestNetClicked">TestNet</mt-button>
     <p></p>
-    <mt-button type="primary" @click="ZeroNetClicked">ZeroNet</mt-button>
+    <mt-button type="default" disabled @click="ZeroNetClicked">ZeroNet</mt-button>
   </div>
 </template>
 <script>
@@ -19,7 +19,7 @@
       MainNetClicked (e) {
         var storage=window.localStorage;
         storage.setItem("net","MainNet");
-        storage.setItem("api_base_url","http://150.109.57.242:6001");
+        storage.setItem("api_base_url","http://150.109.50.199:6001");
         this.$router.push('/wallet'); 
       },
       TestNetClicked (e) {
