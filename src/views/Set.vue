@@ -19,7 +19,7 @@
       MainNetClicked (e) {
         var storage=window.localStorage;
         storage.setItem("net","MainNet");
-        storage.setItem("api_base_url","http://150.109.50.199:6001");
+        storage.setItem("api_base_url","http://150.109.50.199:6002");
         this.$router.push('/wallet'); 
       },
       TestNetClicked (e) {
