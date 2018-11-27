@@ -5,8 +5,14 @@
       <p>({{net}})</p>
       <div class="pan">
         <div v-bind:key="item.index" v-for="item in list" style="text-align:left;">
-          <mt-cell v-bind:title="item.time" v-bind:value="item.value"></mt-cell>
+          <mu-list-item-content>
+            <mu-list-item-title>{{item.time}}</mu-list-item-title>
+            <mu-list-item-sub-title>
+              {{item.value}}
+            </mu-list-item-sub-title>
+          </mu-list-item-content>
         </div>
+
         <p></p>
         <mu-button color="primary" @click="ReturnClicked">RETURN</mu-button>
       </div>
