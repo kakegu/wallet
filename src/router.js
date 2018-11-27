@@ -7,13 +7,16 @@ import Import from './views/Import.vue'
 import Wallet from './views/Wallet.vue'
 import Payment from './views/Payment.vue'
 import History from './views/History.vue'
-import BootstrapVue from 'bootstrap-vue'
+import Set from './views/Set.vue'
+import VueQrcode from '@xkeshi/vue-qrcode';
+Vue.component(VueQrcode.name, VueQrcode);
+//import BootstrapVue from 'bootstrap-vue'
 // import 'bootstrap/dist/css/bootstrap.css'
 // import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Mint from 'mint-ui';
 import 'mint-ui/lib/style.css';
 Vue.use(Mint); 
-Vue.use(BootstrapVue);
+//Vue.use(BootstrapVue);
 Vue.use(Router)
 Vue.use(VueResource)
 export default new Router({
@@ -51,12 +54,9 @@ export default new Router({
       component: History
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      path: '/setting',
+      name: 'set',
+      component: Set
     }
   ]
 })

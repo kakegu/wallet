@@ -53,7 +53,7 @@
                 // 地址
                 this.address = Client.walletAddress(this.wallet_public_key, 0, 0)
 
-                var url = "http://150.109.57.242:6001/api/v1/account/register"
+                var url = "http://150.109.57.242:6002/api/v1/account/register"
                 this.$http.post(url,{
                     pubkey:this.wallet_public_key
                 },
