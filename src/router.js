@@ -10,15 +10,18 @@ import History from './views/History.vue'
 import Set from './views/Set.vue'
 import VueQrcode from '@xkeshi/vue-qrcode';
 Vue.component(VueQrcode.name, VueQrcode);
-//import BootstrapVue from 'bootstrap-vue'
+// import BootstrapVue from 'bootstrap-vue'
 // import 'bootstrap/dist/css/bootstrap.css'
 // import 'bootstrap-vue/dist/bootstrap-vue.css'
-import Mint from 'mint-ui';
-import 'mint-ui/lib/style.css';
-Vue.use(Mint); 
-//Vue.use(BootstrapVue);
+// import Mint from 'mint-ui';
+// import 'mint-ui/lib/style.css';
+// Vue.use(Mint); 
 Vue.use(Router)
 Vue.use(VueResource)
+import MuseUI from 'muse-ui'
+import 'muse-ui/dist/muse-ui.css'
+Vue.use(MuseUI)
+Vue.http.options.timeout = 3000;
 export default new Router({
   //mode: 'history',
   base: process.env.BASE_URL,

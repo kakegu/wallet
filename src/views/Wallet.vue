@@ -1,29 +1,40 @@
 <template>
-  <div>
-    <p class="center">
-      <span class="balance">{{balance}}</span>
-      TTT ({{net}})
-    </p>
-
-    <p>
-      <qrcode v-bind:value="'TTT:'+address" :options="{ size: 100 }"></qrcode>
-    </p>
-    <p class="address">{{address}}</p>
-
-    <mt-button type="primary" @click="PaymentClicked">Transfer</mt-button>
-    <p></p>
-    <mt-button type="primary" @click="HistoryClicked">History</mt-button>
-    <p></p>
-    <mt-button type="primary" @click="SettingClicked">Setting</mt-button>
+  <div class="first" :style="{backgroundColor:'#EEF0F6',backgroundImage: 'url(' + bg + ')'}">
+    <span class="center">
+      <h1>
+        <span class="balance">{{balance}}</span>
+        TTT 
+      </h1>
+      <p>({{net}})</p>
+      <div class="pan">
+        <qrcode v-bind:value="'TTT:'+address" :options="{ size: 100 }"></qrcode>
+        <p class="address">{{address}}</p>
+        <p></p>
+        <mu-button color="primary" @click="PaymentClicked">Transfer</mu-button>
+        <p></p>
+        <mu-button color="primary" @click="HistoryClicked">History</mu-button>
+        <p></p>
+        <mu-button color="primary" @click="SettingClicked">Setting</mu-button>
+      </div>
+    </span>
+    <mu-dialog v-bind:title="dialog.title" width="360" :open.sync="dialog.display">
+      {{dialog.message}}
+      <mu-button slot="actions" flat color="primary" @click="closeSimpleDialog">Close</mu-button>
+    </mu-dialog>
   </div>
 </template>
 
 <script>
 const Client = require("wallet-base");
-import { MessageBox } from "mint-ui";
 export default {
   data() {
     return {
+      dialog: {
+        title: "",
+        message: "",
+        display: false
+      },
+      bg: require("../assets/bg.png"),
       balance: "",
       private_key: "",
       public_key: "",
@@ -34,6 +45,12 @@ export default {
     };
   },
   methods: {
+    openSimpleDialog() {
+      this.dialog.display = true;
+    },
+    closeSimpleDialog() {
+      this.dialog.display = false;
+    },
     PaymentClicked(e) {
       console.log(e);
       this.$router.push("/payment");
@@ -78,9 +95,9 @@ export default {
         },
         response => {
           // error callback
-          MessageBox.alert("net error").then(action => {
-            this.display = false;
-          });
+          this.openSimpleDialog();
+          this.dialog.title = "error";
+          this.dialog.message = "network error";
         }
       );
     }
@@ -96,31 +113,56 @@ export default {
 </script>
 
 <style scoped>
-.center {
-  text-align: center;
-}
 .balance {
   font-size: 20px;
-}
-h1 {
-  text-align: center;
-  font-size: 30px;
-}
-p {
-  width: 90%;
-  margin: 10px auto;
-  font-size: 22px;
-  font-weight: lighter;
 }
 .address {
   font-size: 14px;
   text-align: center;
   width: 100%;
+  word-break: break-word;
 }
-textarea {
+p {
+  margin: 20px auto;
+}
+button {
   width: 90%;
-  margin: 10px auto;
-  height: 100px;
-  border: solid 1px #ddd;
+}
+body {
+}
+.first {
+  display: table;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.center {
+  display: table-cell;
+  vertical-align: middle;
+}
+.tip {
+  color: #666;
+  text-align: left;
+  font-size: 16px;
+}
+h1 {
+  color: #26a2ff;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+.pan {
+  padding: 20px;
+  background: #fff;
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto;
+  border-radius: 10px;
 }
 </style>

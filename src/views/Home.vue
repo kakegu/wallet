@@ -1,22 +1,36 @@
 <template>
-  <div class="first" :style="{backgroundImage: 'url(' + bg + ')'}">
+  <div class="first" :style="{backgroundColor:'#EEF0F6',backgroundImage: 'url(' + bg + ')'}">
     <span class="center">
+      <h1>Fusion Wallet</h1>
+      <p>A web wallet for TrustNote</p>
       <div class="pan">
         <img alt="logo" width="100" src="../assets/logo.png">
-        <h1>TrustNote Fusion Wallet</h1>
         <p></p>
-        <mt-button type="primary" @click="MakeClicked">Create New Wallet</mt-button>
+        <mu-button color="primary" :disabled="disabled" @click="MakeClicked">Create New Wallet</mu-button>
         <p></p>
-        <mt-button type="primary" @click="ImportClicked">Import Existing Wallet</mt-button>
+        <mu-button color="primary" :disabled="disabled" @click="ImportClicked">Import Existing Wallet</mu-button>
+        <p></p>
+        <mu-checkbox label="I have Accepted the Terms and Privacy Policy" v-model="iagerrd"></mu-checkbox>
       </div>
     </span>
   </div>
 </template>
 <script>
 export default {
+  watch: {
+    iagerrd: function(val, oldVal) {
+      if (val) {
+        this.disabled = false;
+      } else {
+        this.disabled = true;
+      }
+    },
+  },
   data() {
     return {
-      bg: require("../assets/bg.jpg")
+      bg: require("../assets/bg.png"),
+      iagerrd:true,
+      disabled:false
     };
   },
   methods: {
@@ -50,7 +64,7 @@ h1 {
   font-size: 30px;
 }
 button {
-  width: 220px;
+  width: 90%;
 }
 body {
 }
@@ -71,10 +85,21 @@ body {
   display: table-cell;
   vertical-align: middle;
 }
+.tip {
+  color: #666;
+  text-align: left;
+  font-size: 16px;
+}
+h1 {
+  color: #26a2ff;
+  margin-bottom: 20px;
+  font-size: 50px;
+}
 .pan {
-  padding: 40px;
+  padding: 20px;
   background: #fff;
-  width: 400px;
+  width: 80%;
+  max-width: 500px;
   margin: 0 auto;
   border-radius: 10px;
 }

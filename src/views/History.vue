@@ -1,29 +1,50 @@
 <template>
-  <div>
-    <mt-header v-bind:title="'History ('+net+')'">
-      <router-link to="/wallet" slot="left">
-        <mt-button icon="back">Back</mt-button>
-      </router-link>
-    </mt-header>
-    <div v-bind:key="item.index" v-for="item in list" style="text-align:left;">
-      <mt-cell v-bind:title="item.time" v-bind:value="item.value"></mt-cell>
-    </div>
+  <div class="first" :style="{backgroundColor:'#EEF0F6',backgroundImage: 'url(' + bg + ')'}">
+    <span class="center">
+      <h1>History</h1>
+      <p>({{net}})</p>
+      <div class="pan">
+        <div v-bind:key="item.index" v-for="item in list" style="text-align:left;">
+          <mt-cell v-bind:title="item.time" v-bind:value="item.value"></mt-cell>
+        </div>
+        <p></p>
+        <mu-button color="primary" @click="ReturnClicked">RETURN</mu-button>
+      </div>
+    </span>
+    <mu-dialog v-bind:title="dialog.title" width="360" :open.sync="dialog.display">
+      {{dialog.message}}
+      <mu-button slot="actions" flat color="primary" @click="closeSimpleDialog">Close</mu-button>
+    </mu-dialog>
   </div>
 </template>
 
 <script>
 const Client = require("wallet-base");
-import { MessageBox } from "mint-ui";
 export default {
   data() {
     return {
+      dialog: {
+        title: "",
+        message: "",
+        display: false
+      },
+      bg: require("../assets/bg.png"),
       list: [],
       address: "",
       net: "",
-      api_base_url:""
+      api_base_url: ""
     };
   },
   methods: {
+    ReturnClicked() {
+      this.$router.push("/wallet");
+    },
+    openSimpleDialog() {
+      this.dialog.display = true;
+    },
+    closeSimpleDialog() {
+      this.dialog.display = false;
+    },
     PaymentClicked(e) {
       console.log(e);
       this.$router.push("/payment");
@@ -42,7 +63,8 @@ export default {
     },
     GetHistory(e) {
       var url =
-        this.api_base_url + "/api/v1/asset/txhistory/" +
+        this.api_base_url +
+        "/api/v1/asset/txhistory/" +
         this.address +
         "/TTT/1/10";
       this.$http.get(url).then(
@@ -117,9 +139,9 @@ export default {
         },
         response => {
           // error callback
-          MessageBox.alert("net error").then(action => {
-            this.display = false;
-          });
+          this.openSimpleDialog();
+          this.dialog.title = "error";
+          this.dialog.message = "network error";
         }
       );
     }
@@ -170,5 +192,45 @@ textarea {
   margin: 10px auto;
   height: 100px;
   border: solid 1px #ddd;
+}
+button {
+  width: 90%;
+}
+body {
+}
+.first {
+  display: table;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.center {
+  display: table-cell;
+  vertical-align: middle;
+}
+.tip {
+  color: #666;
+  text-align: left;
+  font-size: 16px;
+}
+h1 {
+  color: #26a2ff;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+.pan {
+  padding: 20px;
+  background: #fff;
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto;
+  border-radius: 10px;
 }
 </style>
