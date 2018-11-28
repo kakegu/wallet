@@ -6,6 +6,7 @@ import Create from './views/Create.vue'
 import Import from './views/Import.vue'
 import Wallet from './views/Wallet.vue'
 import Payment from './views/Payment.vue'
+import Payment4web from './views/Payment4web.vue'
 import History from './views/History.vue'
 import Set from './views/Set.vue'
 import VueQrcode from '@xkeshi/vue-qrcode';
@@ -50,6 +51,11 @@ export default new Router({
       path: '/payment',
       name: 'payment',
       component: Payment
+    },
+    {
+      path: '/payment4web/:net/:address/:amount/:message',
+      name: 'payment4web',
+      component: Payment4web
     },
     {
       path: '/history',
