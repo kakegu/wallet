@@ -3,7 +3,6 @@
     <span class="center">
       <h1>
         <span class="balance">{{balance}}</span>
-        TTT 
       </h1>
       <p>({{net}})</p>
       <div class="pan">

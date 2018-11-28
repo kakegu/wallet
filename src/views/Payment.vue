@@ -5,12 +5,12 @@
       <p>({{net}})</p>
       <div class="pan">
         <mu-text-field placeholder="Destination Address" v-model="to_address"></mu-text-field>
-        <mu-text-field placeholder="Amount ttt" v-model="amount"></mu-text-field>
+        <mu-text-field placeholder="Amount" v-model="amount"></mu-text-field>
         <mu-text-field placeholder="Message" v-model="message"></mu-text-field>
         <p class="text">{{text}}</p>
-        <mu-button color="primary" :disabled="disabled" @click="PaymentClicked">Transfer ({{net}})</mu-button>
+        <mu-button color="primary" :disabled="disabled" @click="PaymentClicked">OK ({{net}})</mu-button>
         <p></p>
-        <mu-button @click="ReturnClicked">RETURN</mu-button>
+        <mu-button @click="ReturnClicked">CANCEL</mu-button>
         <div class="full mask" v-show="display"></div>
         <div class="full" v-show="display">
           <div style="position: absolute; left: 50%;top:45%;">

@@ -1,16 +1,21 @@
 <template>
   <div class="first" :style="{backgroundColor:'#EEF0F6',backgroundImage: 'url(' + bg + ')'}">
     <span class="center">
-      <h1>Transfer</h1>
+      <h1>Amount to be paid</h1>
       <p>({{net}})</p>
       <div class="pan">
-        <mu-text-field placeholder="Destination Address" v-model="to_address"></mu-text-field>
-        <mu-text-field placeholder="Amount ttt" v-model="amount"></mu-text-field>
-        <mu-text-field placeholder="Message" v-model="message"></mu-text-field>
+        <div class="order">
+          <p><span class="amount">{{amount}}</span></p>
+          <p></p>
+          <p>address: {{to_address}}</p>
+          <p></p>
+          <p>order Number:{{message}}</p>
+        </div>
+
         <p class="text">{{text}}</p>
-        <mu-button color="primary" :disabled="disabled" @click="PaymentClicked">Transfer ({{net}})</mu-button>
+        <mu-button color="primary" :disabled="disabled" @click="PaymentClicked">OK ({{net}})</mu-button>
         <p></p>
-        <mu-button @click="ReturnClicked">RETURN</mu-button>
+        <mu-button @click="ReturnClicked">CANCEL</mu-button>
         <div class="full mask" v-show="display"></div>
         <div class="full" v-show="display">
           <div style="position: absolute; left: 50%;top:45%;">
@@ -236,11 +241,11 @@ export default {
       this.api_base_url = "http://150.109.50.199:6002";
     }
     if (net == "test") {
-        this.net = "TestNet";
+      this.net = "TestNet";
       this.api_base_url = "http://150.109.57.242:6002";
     }
     if (net == "zero") {
-        this.net = "ZeroNet";
+      this.net = "ZeroNet";
       this.api_base_url = "http://dev.trustnote.org:6002";
     }
     //reg
@@ -250,6 +255,18 @@ export default {
 </script>
 
 <style scoped>
+.order {
+  width: 90%;
+  text-align: left;
+  margin: auto;
+}
+.amount{
+  color:#f00;
+  font-size: 22px;
+}
+.disabled {
+  color: #ccc;
+}
 .mask {
   background: #000;
   opacity: 0.8;
@@ -271,9 +288,6 @@ input {
 }
 .center {
   text-align: center;
-}
-.wxc-btn {
-  margin: 10px auto;
 }
 .balance {
   font-size: 20px;
