@@ -107,8 +107,8 @@ export default {
     closeSimpleDialog() {
       this.dialog.display = false;
       this.display = false;
-      if (this.payment_success) {
-        self.$router.push("/");
+      if (this.payment_success == true) {
+        this.$router.push("/");
       }
     },
     GetSettingValue(e) {

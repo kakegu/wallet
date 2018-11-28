@@ -8,7 +8,8 @@
           <mu-list-item-content>
             <mu-list-item-title>{{item.time}}</mu-list-item-title>
             <mu-list-item-sub-title>
-              {{item.value}}
+              <div>{{item.address}}</div>
+              <div>{{item.value}}</div>
             </mu-list-item-sub-title>
           </mu-list-item-content>
         </div>
@@ -117,7 +118,8 @@ export default {
                   amount = element.amount;
                   this.list.push({
                     time: Y + M + D + h + m + s,
-                    value: type + amount / 1000000
+                    value: type + amount / 1000000,
+                    address:element.address
                   });
                 }
               });
@@ -134,7 +136,8 @@ export default {
                   amount = element.amount;
                   this.list.push({
                     time: Y + M + D + h + m + s,
-                    value: type + parseFloat(amount / 1000000)
+                    value: type + parseFloat(amount / 1000000),
+                    address:element.address
                   });
                 } else {
                   //别人utxo找零
