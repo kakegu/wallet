@@ -4,11 +4,13 @@
       <h1>Transfer</h1>
       <p>({{net}})</p>
       <div class="pan">
-        <mu-text-field placeholder="Destination Address" v-model="to_address"></mu-text-field>
-        <mu-text-field placeholder="Amount" v-model="amount"></mu-text-field>
-        <mu-text-field placeholder="Message" v-model="message"></mu-text-field>
+        <mu-text-field class="input" placeholder="Destination Address" v-model="to_address"></mu-text-field>
+        <mu-text-field class="input" placeholder="Amount" v-model="amount"></mu-text-field>
+        <mu-text-field class="input" placeholder="Message" v-model="message"></mu-text-field>
         <p class="text">{{text}}</p>
-        <mu-button color="primary" :disabled="disabled" @click="PaymentClicked">OK ({{net}})</mu-button>
+        <mu-button color="primary" :disabled="disabled" @click="PaymentClicked">
+          OK
+        </mu-button>
         <p></p>
         <mu-button @click="ReturnClicked">CANCEL</mu-button>
         <div class="full mask" v-show="display"></div>
@@ -87,11 +89,11 @@ export default {
   },
   methods: {
     check(e) {
-        if(this.to_address.length == 32 & this.amount > 0){
-            this.disabled = false;
-        }else{
-            this.disabled = true;
-        }
+      if ((this.to_address.length == 32) & (this.amount > 0)) {
+        this.disabled = false;
+      } else {
+        this.disabled = true;
+      }
     },
     ReturnClicked(e) {
       this.$router.push("/wallet");
@@ -102,8 +104,8 @@ export default {
     closeSimpleDialog() {
       this.dialog.display = false;
       this.display = false;
-      if (this.payment_success) {
-        self.$router.push("/");
+      if (this.payment_success == true) {
+        this.$router.push("/");
       }
     },
     GetSettingValue(e) {
@@ -244,11 +246,9 @@ export default {
   width: 100%;
   height: 100%;
 }
-input {
+.input {
   width: 90%;
-  margin: 10px auto;
-  padding: 5px;
-  border: solid 1px #ddd;
+
 }
 .center {
   text-align: center;

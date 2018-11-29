@@ -4,14 +4,12 @@
       <h1>History</h1>
       <p>({{net}})</p>
       <div class="pan">
-        <div v-bind:key="item.index" v-for="item in list" style="text-align:left;">
-          <mu-list-item-content>
-            <mu-list-item-title>{{item.time}}</mu-list-item-title>
-            <mu-list-item-sub-title>
-              <div>{{item.address}}</div>
-              <div>{{item.value}}</div>
-            </mu-list-item-sub-title>
-          </mu-list-item-content>
+        <div v-bind:key="item.index" v-for="item in list" style="text-align:left;width:90%;margin:auto">
+          <mu-expansion-panel>
+            <div slot="header" class="fullwidth"><span class="left time">{{item.time}}</span> <span class="right amount">{{item.value}}</span></div>
+            <span class="break">{{item.address}}</span>
+          </mu-expansion-panel>
+          <p></p>
         </div>
 
         <p></p>
@@ -119,7 +117,7 @@ export default {
                   this.list.push({
                     time: Y + M + D + h + m + s,
                     value: type + amount / 1000000,
-                    address:element.address
+                    address: element.address
                   });
                 }
               });
@@ -137,7 +135,7 @@ export default {
                   this.list.push({
                     time: Y + M + D + h + m + s,
                     value: type + parseFloat(amount / 1000000),
-                    address:element.address
+                    address: element.address
                   });
                 } else {
                   //别人utxo找零
@@ -160,8 +158,7 @@ export default {
     var private_key = storage.getItem("private_key");
     if (private_key == null) {
       console.log("privatekey!", private_key);
-      //window.location.href = '/'
-      this.$router.push("/"); //不知道为什么这个不起作用。。。
+      this.$router.push("/"); 
     }
   },
   mounted: function() {
@@ -172,6 +169,26 @@ export default {
 </script>
 
 <style scoped>
+.time{
+  color: #555;
+  font-size: 14px;
+}
+.break{
+  word-break:break-all;
+}
+.fullwidth{
+  width: 100%;
+}
+.left{
+  float: left;
+}
+.amount{
+  color: #f00;
+  font-size: 14px;
+}
+.right{
+  float: right;
+}
 .mint-cell-wrapper {
   text-align: left;
 }
@@ -188,8 +205,6 @@ h1 {
 p {
   width: 90%;
   margin: 10px auto;
-  font-size: 22px;
-  font-weight: lighter;
 }
 .address {
   font-size: 14px;

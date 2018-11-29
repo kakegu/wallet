@@ -116,7 +116,7 @@ export default {
           storage.setItem("address", this.address);
           //跳转到 wallet
           this.$router.push("/wallet");
-        }, 2000);
+        }, 1000);
       }
     }
   },

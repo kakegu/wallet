@@ -102,9 +102,13 @@ export default {
           this.dialog.message = "network error";
         }
       );
+      setTimeout(() => {
+        this.GetBalance()
+      }, 20000);
     }
   },
   created: function() {
+
     //get setting value
     this.GetSettingValue();
     //get balance

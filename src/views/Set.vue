@@ -2,9 +2,7 @@
   <div class="first" :style="{backgroundColor:'#EEF0F6',backgroundImage: 'url(' + bg + ')'}">
     <span class="center">
       <h1>Setting Network</h1>
-      <p>select Network For TrustNote</p>
       <div class="pan">
-        <img alt="logo" width="100" src="../assets/logo.png">
         <p></p>
         <mu-button color="primary" @click="MainNetClicked">MainNet</mu-button>
         <p></p>
