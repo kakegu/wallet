@@ -40,7 +40,8 @@ export default {
       wallet_public_key: "",
       api_base_url: "",
       address: "",
-      net: ""
+      net: "",
+      isgetvalueok: false
     };
   },
   methods: {
@@ -66,20 +67,22 @@ export default {
       if (private_key == null) {
         console.log("privatekey!", private_key);
         this.$router.push("/");
+      } else {
+        var net = storage.getItem("net");
+        if (net == null) {
+          //setting testnet
+          storage.setItem("net", "ZeroNet");
+          storage.setItem("api_base_url", "http://150.109.47.45:6002");
+        }
+        this.net = storage.getItem("net");
+        //storage.removeItem("is_registered");
+        this.private_key = storage.getItem("private_key");
+        this.public_key = storage.getItem("public_key");
+        this.wallet_public_key = storage.getItem("wallet_public_key");
+        this.address = storage.getItem("address");
+        this.api_base_url = storage.getItem("api_base_url");
+        this.isgetvalueok = true;
       }
-      var net = storage.getItem("net");
-      if (net == null) {
-        //setting testnet
-        storage.setItem("net", "TestNet");
-        storage.setItem("api_base_url", "http://150.109.57.242:6002");
-      }
-      this.net = storage.getItem("net");
-      //storage.removeItem("is_registered");
-      this.private_key = storage.getItem("private_key");
-      this.public_key = storage.getItem("public_key");
-      this.wallet_public_key = storage.getItem("wallet_public_key");
-      this.address = storage.getItem("address");
-      this.api_base_url = storage.getItem("api_base_url");
     },
     GetBalance(e) {
       var url =
@@ -105,7 +108,9 @@ export default {
     //get setting value
     this.GetSettingValue();
     //get balance
-    this.GetBalance();
+    if (this.isgetvalueok) {
+      this.GetBalance();
+    }
   },
   mounted: function() {}
 };

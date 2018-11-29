@@ -10,21 +10,47 @@
         <p></p>
         <mu-button color="primary" @click="TestNetClicked">TestNet</mu-button>
         <p></p>
-        <mu-button color="default" disabled @click="ZeroNetClicked">ZeroNet (open soon)</mu-button>
+        <mu-button color="primary" @click="ZeroNetClicked">ZeroNet</mu-button>
         <p></p>
-        <mu-button color="primary" @click="ReturnClicked">RETURN</mu-button>
+        <mu-button color="error" @click="ClearWalletClicked">Clear Wallet</mu-button>
+        <p></p>
+        <mu-button @click="ReturnClicked">RETURN</mu-button>
       </div>
     </span>
+    <mu-dialog v-bind:title="dialog.title" width="360" :open.sync="dialog.display">
+      {{dialog.message}}
+      <mu-button slot="actions" class="dbtn" flat color="error" @click="ClearWallet">Yes!!!</mu-button>
+      <mu-button slot="actions" class="dbtn" flat color="primary" @click="closeSimpleDialog">Cancel</mu-button>
+    </mu-dialog>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
+      dialog: {
+        title: "alert!",
+        message: "Are you sure delete your wallet ?",
+        display: false
+      },
       bg: require("../assets/bg.png")
     };
   },
   methods: {
+    openSimpleDialog() {
+      this.dialog.display = true;
+    },
+    closeSimpleDialog() {
+      this.dialog.display = false;
+    },
+    ClearWallet(e) {
+      var storage = window.localStorage;
+      storage.clear();
+      this.$router.push("/wallet");
+    },
+    ClearWalletClicked(e) {
+      this.openSimpleDialog();
+    },
     ReturnClicked(e) {
       this.$router.push("/wallet");
     },
@@ -45,7 +71,7 @@ export default {
       console.log(e);
       var storage = window.localStorage;
       storage.setItem("net", "ZeroNet");
-      storage.setItem("api_base_url", "http://dev.trustnote.org:6002");
+      storage.setItem("api_base_url", "http://150.109.47.45:6002");
       this.$router.push("/wallet");
     }
   },
@@ -66,6 +92,9 @@ h1 {
 }
 button {
   width: 90%;
+}
+.dbtn{
+  width: 100px;
 }
 body {
 }
