@@ -2,7 +2,7 @@
   <div class="first" :style="{backgroundColor:'#EEF0F6',backgroundImage: 'url(' + bg + ')'}">
     <span class="center">
       <h1>Fusion Wallet</h1>
-      <p>A web wallet for TrustNote</p>
+      <p>payment for fun !</p>
       <div class="pan">
         <img alt="logo" width="100" src="../assets/logo.png">
         <p></p>
